@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Healthy Lifestyle</title>
+  <meta name="description" content="Panduan gaya hidup sehat: makanan bergizi, olahraga, tidur, air putih, dan kesehatan mental.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --bs-body-font-family: "DM Sans", system-ui, sans-serif; --bs-body-color: #14281f; --bs-border-color: #d3e1d8; --bs-success: #2e8b57; --bs-success-rgb: 46,139,87; }
+    html { scroll-behavior: smooth; }
+    [id] { scroll-margin-top: 4.5rem; }
+    h1, h2, h3, .navbar-brand, .big { font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 800; }
+    .btn-success { --bs-btn-bg: #2e8b57; --bs-btn-border-color: #2e8b57; --bs-btn-hover-bg: #26744a; --bs-btn-hover-border-color: #26744a; }
+    .hero { background: radial-gradient(500px 250px at 100% 0, #2f8fc433, transparent 70%), radial-gradient(500px 250px at 0 100%, #2e8b5733, transparent 70%), #fff; }
+    .title span { background: linear-gradient(90deg, #2e8b57, #2f8fc4); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .plate { width: min(100%, 280px); aspect-ratio: 1; border-radius: 50%; border: 10px solid #fff; background: conic-gradient(#2e8b57 0 33.3%, #e07b2e 0 66.6%, #5a63c8 0 83.3%, #b8588f 0); }
+    .lift { transition: transform .2s; }
+    .lift:hover { transform: translateY(-4px); }
+    .form-check-input:checked { background-color: var(--bs-success); border-color: var(--bs-success); }
+    .form-check-input:checked + label { text-decoration: line-through; color: var(--bs-secondary-color); }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-md sticky-top bg-white bg-opacity-75 border-bottom" style="backdrop-filter:blur(10px)">
+    <div class="container" style="max-width:1040px">
+      <a class="navbar-brand" href="#home">Healthy Lifestyle</a>
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu" aria-label="Buka menu"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse justify-content-end" id="menu">
+        <ul class="nav nav-pills fw-semibold pt-2 pt-md-0" style="--bs-nav-pills-link-active-bg:#14281f">
+          <li class="nav-item"><a class="nav-link" href="#home" data-page="home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#makanan-sehat" data-page="makanan-sehat">Makanan Sehat</a></li>
+          <li class="nav-item"><a class="nav-link" href="#olahraga" data-page="olahraga">Olahraga</a></li>
+          <li class="nav-item"><a class="nav-link" href="#tips-tidur" data-page="tips-tidur">Tips Tidur</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <main class="container py-4 py-md-5" style="max-width:1040px">
+    <section data-page="home">
+      <div id="hero-home"></div>
+      <div class="row g-3 mt-1" id="stats"></div>
+
+      <h2 class="mt-5 pt-3" id="apa-saja">Apa saja yang termasuk Healthy Lifestyle?</h2>
+      <p class="text-secondary">Lima kebiasaan utama yang saling melengkapi.</p>
+      <div class="row g-3" id="pilar"></div>
+
+      <h2 class="mt-5 pt-3">Manfaat gaya hidup sehat</h2>
+      <div class="row g-3" id="manfaat"></div>
+
+      <div class="row g-4 mt-3">
+        <div class="col-lg-6"><h2 class="h3">Kebiasaan yang perlu dihindari</h2><ul class="list-group mt-3" id="hindari"></ul></div>
+        <div class="col-lg-6"><h2 class="h3">Tips memulai dari hal kecil</h2><ol class="list-group list-group-numbered mt-3" id="tips"></ol></div>
+      </div>
+
+      <blockquote class="blockquote border-start border-4 border-success bg-success-subtle rounded-end p-4 mt-5 mb-0">
+        <p class="mb-1 fw-bold">Kesehatan bukan segalanya, tetapi tanpa kesehatan segalanya menjadi tidak berarti.</p>
+        <footer class="blockquote-footer mb-0">Pengingat untuk selalu menjaga tubuh dan pikiran</footer>
+      </blockquote>
+
+      <div class="card border rounded-4 shadow p-4 p-md-5 mt-5" id="checklist">
+        <div class="d-flex justify-content-between align-items-end mb-3">
+          <div><h2 class="h3 mb-1">Checklist sehat hari ini</h2><p class="text-secondary mb-0">Centang kebiasaan yang sudah kamu lakukan.</p></div>
+          <strong id="checkLabel" aria-live="polite"></strong>
+        </div>
+        <div class="progress mb-3" role="progressbar" aria-label="Progres checklist"><div class="progress-bar bg-success" id="checkBar"></div></div>
+        <div class="row g-2" id="checkList"></div>
+        <p class="small text-secondary mt-3 mb-0" id="checkMsg"></p>
+      </div>
+    </section>
+
+    <section class="d-none" data-page="makanan-sehat">
+      <div id="hero-makan"></div>
+
+      <h2 class="mt-5 pt-3">Konsep &quot;Isi Piringku&quot;</h2>
+      <p class="text-secondary">Panduan porsi dari Kementerian Kesehatan RI: separuh piring untuk sayur dan buah, separuhnya lagi untuk makanan pokok dan lauk pauk.</p>
+      <div class="row align-items-center g-4">
+        <div class="col-md-5"><div class="plate shadow mx-auto" role="img" aria-label="Diagram piring"></div></div>
+        <div class="col-md-7" id="legend"></div>
+      </div>
+
+      <h2 class="mt-5 pt-3">Kelompok makanan sehat</h2>
+      <div class="row g-3" id="kelompok"></div>
+
+      <h2 class="mt-5 pt-3">Zat gizi yang dibutuhkan tubuh</h2>
+      <div class="table-responsive border rounded-4 overflow-hidden mt-3">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="table-success"><tr><th>Zat gizi</th><th>Manfaat utama</th><th>Contoh makanan</th></tr></thead>
+          <tbody id="gizi"></tbody>
+        </table>
+      </div>
+
+      <h2 class="mt-5 pt-3">Contoh menu sehat dalam sehari</h2>
+      <div class="accordion mt-3" id="menuHarian"></div>
+
+      <h2 class="mt-5 pt-3">Makanan yang perlu dibatasi</h2>
+      <p class="text-secondary">Batas harian dari Kemenkes RI (pesan G4-G1-L5).</p>
+      <div class="row g-3" id="batas"></div>
+      <ul class="list-group mt-3" id="batasi"></ul>
+
+      <h2 class="mt-5 pt-3">Tips memilih dan menyiapkan makanan</h2>
+      <ol class="list-group list-group-numbered mt-3" id="tipsMakan"></ol>
+
+      <div class="text-center mt-5">
+        <a href="#home" class="btn btn-outline-secondary rounded-pill px-4">Kembali ke Home</a>
+        <a href="#olahraga" class="btn btn-success rounded-pill px-4">Lanjut ke Olahraga</a>
+      </div>
+    </section>
+
+    <section class="d-none" data-page="olahraga">
+      <div id="hero-or"></div>
+      <div class="row g-3 mt-1" id="statsOr"></div>
+
+      <h2 class="mt-5 pt-3">Jenis olahraga ringan untuk pemula</h2>
+      <p class="text-secondary">Pilih yang paling kamu sukai agar mudah konsisten.</p>
+      <div class="row g-3" id="jenisOr"></div>
+
+      <h2 class="mt-5 pt-3">Manfaat berolahraga secara rutin</h2>
+      <div class="row g-3" id="manfaatOr"></div>
+
+      <h2 class="mt-5 pt-3">Tingkat intensitas olahraga</h2>
+      <p class="text-secondary">Cara sederhana mengenali intensitas lewat &quot;tes bicara&quot;.</p>
+      <div class="table-responsive border rounded-4 overflow-hidden mt-3">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="table-success"><tr><th>Intensitas</th><th>Tanda yang dirasakan</th><th>Contoh</th></tr></thead>
+          <tbody id="intensitas"></tbody>
+        </table>
+      </div>
+
+      <h2 class="mt-5 pt-3">Contoh jadwal olahraga mingguan</h2>
+      <p class="text-secondary">Sesuaikan dengan kemampuan dan kondisi tubuhmu.</p>
+      <div class="accordion mt-3" id="jadwalOr"></div>
+
+      <div class="row g-4 mt-3">
+        <div class="col-lg-6"><h2 class="h3">Tahapan setiap sesi olahraga</h2><ol class="list-group list-group-numbered mt-3" id="tahapOr"></ol></div>
+        <div class="col-lg-6"><h2 class="h3">Tips berolahraga dengan aman</h2><ul class="list-group mt-3" id="tipsOr"></ul></div>
+      </div>
+
+      <div class="alert alert-warning mt-4 mb-0" role="alert">
+        <strong>Perlu diperhatikan:</strong> bila memiliki penyakit tertentu (misalnya jantung, tekanan darah tinggi, atau diabetes) atau sedang hamil, konsultasikan dulu dengan dokter sebelum memulai program olahraga. Hentikan olahraga bila merasa nyeri dada, pusing berat, atau sesak napas.
+      </div>
+
+      <div class="text-center mt-5">
+        <a href="#makanan-sehat" class="btn btn-outline-secondary rounded-pill px-4">Kembali ke Makanan Sehat</a>
+        <a href="#tips-tidur" class="btn btn-success rounded-pill px-4">Lanjut ke Tips Tidur</a>
+      </div>
+    </section>
+
+    <section class="d-none" data-page="tips-tidur">
+      <div id="hero-tidur"></div>
+      <div class="row g-3 mt-1" id="statsTd"></div>
+
+      <h2 class="mt-5 pt-3">Kenapa tidur itu penting?</h2>
+      <p class="text-secondary">Saat tidur, tubuh dan otak tetap bekerja untuk memulihkan diri.</p>
+      <div class="row g-3" id="manfaatTd"></div>
+
+      <h2 class="mt-5 pt-3">Berapa lama waktu tidur yang dibutuhkan?</h2>
+      <p class="text-secondary">Kebutuhan tidur berbeda pada tiap usia. Angka di bawah ini adalah patokan umum.</p>
+      <div class="table-responsive border rounded-4 overflow-hidden mt-3">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="table-success"><tr><th>Kelompok usia</th><th>Kebutuhan tidur</th><th>Catatan</th></tr></thead>
+          <tbody id="usiaTd"></tbody>
+        </table>
+      </div>
+
+      <h2 class="mt-5 pt-3">Contoh rutinitas menjelang tidur</h2>
+      <p class="text-secondary">Rutinitas yang sama setiap malam membantu tubuh mengenali waktunya beristirahat.</p>
+      <div class="accordion mt-3" id="rutinTd"></div>
+
+      <h2 class="mt-5 pt-3">Menciptakan kamar tidur yang nyaman</h2>
+      <div class="row g-3" id="kamarTd"></div>
+
+      <div class="row g-4 mt-3">
+        <div class="col-lg-6"><h2 class="h3">Hal yang mengganggu tidur</h2><ul class="list-group mt-3" id="gangguTd"></ul></div>
+        <div class="col-lg-6"><h2 class="h3">Tips agar tidur lebih nyenyak</h2><ol class="list-group list-group-numbered mt-3" id="tipsTd"></ol></div>
+      </div>
+
+      <h2 class="mt-5 pt-3">Bagaimana kalau susah tidur?</h2>
+      <ul class="list-group mt-3" id="susahTd"></ul>
+
+      <div class="alert alert-warning mt-4 mb-0" role="alert">
+        <strong>Perlu diperhatikan:</strong> bila kesulitan tidur berlangsung lebih dari beberapa minggu, mendengkur keras disertai henti napas saat tidur, atau tetap mengantuk berat di siang hari meski sudah tidur cukup, sebaiknya konsultasikan dengan dokter.
+      </div>
+
+      <div class="text-center mt-5">
+        <a href="#olahraga" class="btn btn-outline-secondary rounded-pill px-4">Kembali ke Olahraga</a>
+        <a href="#home" class="btn btn-success rounded-pill px-4">Kembali ke Home</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-top py-4 mt-4 text-secondary small">
+    <div class="container d-flex flex-wrap justify-content-between gap-2" style="max-width:1040px">
+      <span>© <span id="year"></span> Healthy Lifestyle</span><span>Jaga tubuh, jaga pikiran</span>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const stats = [["5", "Pilar gaya hidup sehat"], ["7–9 jam", "Tidur dewasa per malam"], ["30 mnt", "Gerak ringan tiap hari"], ["8 gelas", "Patokan air putih harian"]];
+    const pilar = [
+      ["#e07b2e", "Mengonsumsi makanan bergizi", "Makan makanan yang mengandung karbohidrat, protein, vitamin, mineral, dan serat, misalnya nasi, ikan, telur, sayur, dan buah."],
+      ["#2e8b57", "Rutin berolahraga", "Menjaga kebugaran, memperkuat otot dan tulang, serta kesehatan jantung. Contoh: jalan kaki, bersepeda, jogging, bulu tangkis."],
+      ["#5a63c8", "Tidur yang cukup", "Waktu bagi tubuh untuk beristirahat dan memulihkan energi. Orang dewasa umumnya butuh sekitar 7–9 jam setiap malam."],
+      ["#2f8fc4", "Minum air putih yang cukup", "Menjaga keseimbangan cairan dan mendukung fungsi organ, jadi minumlah secara teratur sesuai kebutuhan tubuh."],
+      ["#b8588f", "Menjaga kesehatan mental", "Kelola stres dengan hobi, istirahat, berbicara dengan teman atau keluarga, dan kegiatan yang menenangkan."]
+    ];
+    const manfaat = [
+      ["Daya tahan tubuh kuat", "Tubuh lebih mampu melawan penyakit."],
+      ["Lebih berenergi", "Siap beraktivitas, belajar, atau bekerja sepanjang hari."],
+      ["Risiko penyakit lebih rendah", "Membantu mencegah obesitas, diabetes, dan penyakit jantung."],
+      ["Suasana hati lebih baik", "Tidur cukup dan aktif bergerak membuat pikiran lebih tenang dan fokus."]
+    ];
+    const hindari = ["Begadang dan jam tidur tidak teratur", "Terlalu sering jajan makanan manis, berminyak, atau instan", "Jarang bergerak dan terlalu lama duduk", "Merokok dan terpapar asap rokok", "Terlalu lama bermain gawai sampai lupa istirahat"];
+    const tips = ["Jalan kaki 15 menit setiap hari, lalu tambah pelan-pelan.", "Bawa botol minum agar tidak lupa minum air putih.", "Tambah satu porsi sayur atau buah setiap hari.", "Tidur dan bangun di jam yang sama setiap hari."];
+    const checks = ["Makan makanan bergizi", "Bergerak atau berolahraga", "Tidur cukup semalam", "Minum air putih cukup", "Meluangkan waktu untuk rileks"];
+
+    const legend = [
+      ["#2e8b57", "Sayuran (± sepertiga piring)", "Bayam, kangkung, wortel, buncis. Kaya serat, vitamin, mineral."],
+      ["#e07b2e", "Makanan pokok (± sepertiga piring)", "Nasi, jagung, ubi, singkong, roti. Sumber energi utama."],
+      ["#5a63c8", "Lauk pauk (± seperenam piring)", "Ikan, telur, tempe, tahu, ayam. Sumber protein."],
+      ["#b8588f", "Buah-buahan (± seperenam piring)", "Pisang, pepaya, jeruk, mangga. Sumber vitamin dan serat."]
+    ];
+    const kelompok = [
+      ["images/sayuran.jpg", "Sumber serat", "Sayuran", "Bayam, kangkung, wortel, dan brokoli. Kaya vitamin, mineral, dan serat."],
+      ["images/buah.jpg", "Sumber vitamin", "Buah-buahan", "Pisang, pepaya, jeruk, dan apel. Membantu memenuhi kebutuhan vitamin dan serat."],
+      ["images/makanan-pokok.jpg", "Sumber energi", "Makanan pokok", "Nasi, jagung, ubi, dan singkong sebagai sumber energi tubuh."],
+      ["images/lauk-hewani.jpg", "Sumber protein", "Ikan dan lauk hewani", "Ikan, telur, dan ayam sebagai sumber protein untuk tubuh."],
+      ["images/tempetahu.jpg", "Protein nabati", "Tempe, tahu, dan kacang", "Sumber protein nabati yang baik untuk tubuh."],
+      ["images/airmineral.jpg", "Menjaga cairan tubuh", "Air putih", "Minum air putih secara teratur untuk memenuhi kebutuhan cairan tubuh."]
+    ];
+    const gizi = [
+      ["Karbohidrat", "Sumber energi utama", "Nasi, ubi, jagung, singkong, roti"],
+      ["Protein", "Membangun dan memperbaiki otot serta sel", "Ikan, telur, tempe, tahu, ayam"],
+      ["Lemak sehat", "Cadangan energi, membantu penyerapan vitamin tertentu", "Ikan, alpukat, kacang-kacangan"],
+      ["Vitamin dan mineral", "Menjaga daya tahan dan kerja organ", "Sayuran hijau, jeruk, wortel, pisang"],
+      ["Serat", "Melancarkan pencernaan", "Sayur, buah, kacang-kacangan, ubi"],
+      ["Air", "Menjaga cairan dan fungsi organ", "Air putih, buah berair seperti semangka"]
+    ];
+    const menu = [
+      ["Sarapan", "06.00–08.00", ["Nasi atau bubur", "Telur rebus", "Tumis sayur", "Segelas air putih"]],
+      ["Makan siang", "12.00–13.00", ["Nasi", "Ikan bakar atau kukus", "Sayur bening", "Potongan buah"]],
+      ["Camilan", "10.00 atau 16.00", ["Pisang atau pepaya", "Kacang rebus", "Yogurt tanpa tambahan gula"]],
+      ["Makan malam", "18.00–19.00", ["Nasi secukupnya", "Tempe atau tahu", "Sayur tumis atau rebus", "Hindari makan terlalu larut"]]
+    ];
+    const batas = [["4 sdm", "Gula per hari"], ["1 sdt", "Garam per hari"], ["5 sdm", "Lemak atau minyak per hari"]];
+    const batasi = ["Minuman manis kemasan dan bersoda", "Gorengan dan makanan berminyak berlebih", "Makanan instan dan olahan yang tinggi garam", "Jajanan manis berlebihan seperti permen, kue, dan es krim"];
+    const tipsMakan = [
+      "<strong>Pilih makanan segar.</strong> Utamakan bahan alami dibanding yang diolah dan dikemas.",
+      "<strong>Baca label kemasan.</strong> Perhatikan gula, garam, lemak, dan tanggal kedaluwarsa.",
+      "<strong>Masak dengan sehat.</strong> Rebus, kukus, panggang, atau tumis sedikit minyak.",
+      "<strong>Atur porsi.</strong> Makan secukupnya dan berhenti sebelum terlalu kenyang.",
+      "<strong>Jaga kebersihan.</strong> Cuci tangan dan bahan makanan."
+    ];
+
+    const statsOr = [["150 mnt", "Aktivitas sedang per minggu"], ["3–5x", "Frekuensi olahraga per minggu"], ["5–10 mnt", "Pemanasan sebelum mulai"], ["2x", "Latihan penguat otot per minggu"]];
+    const jenisOr = [
+      ["images/jalankaki.jpg", "Cocok untuk semua usia", "Jalan kaki", "Mulai dari 15 menit sehari dengan langkah cepat, lalu tambah durasinya."],
+      ["images/lariringan.jpg", "Melatih jantung", "Jogging atau lari ringan", "Perkuat daya tahan jantung dan paru-paru. Awali dengan selang-seling jalan dan lari."],
+      ["images/bersepeda.jpg", "Ringan bagi sendi", "Bersepeda", "Bersepeda membantu meningkatkan kebugaran dan melatih otot kaki."],
+      ["images/berenang.jpg", "Melatih seluruh tubuh", "Berenang", "Berenang melatih banyak kelompok otot sekaligus dan membantu menjaga kebugaran."],
+      ["images/yoga.jpg", "Meningkatkan fleksibilitas", "Yoga", "Yoga membantu melatih kelenturan, keseimbangan, dan relaksasi."],
+      ["images/menari.jpg", "Menyenangkan", "Menari", "Menari menjadi cara menyenangkan untuk bergerak dan meningkatkan kebugaran."]
+    ];
+    const manfaatOr = [
+      ["Jantung lebih sehat", "Membantu menjaga tekanan darah dan kolesterol."],
+      ["Otot dan tulang kuat", "Mengurangi risiko tulang rapuh dan cedera."],
+      ["Berat badan terkontrol", "Membantu membakar kalori dan menjaga berat badan ideal."],
+      ["Stres berkurang", "Gerak tubuh memicu hormon yang membuat suasana hati lebih baik."],
+      ["Tidur lebih nyenyak", "Aktif di siang hari membantu tubuh lebih mudah beristirahat malam hari."],
+      ["Lebih berenergi", "Stamina meningkat sehingga tidak mudah lelah saat beraktivitas."],
+      ["Risiko penyakit menurun", "Membantu mencegah diabetes tipe 2 dan penyakit tidak menular lainnya."],
+      ["Fokus lebih baik", "Aliran darah ke otak lancar sehingga konsentrasi meningkat."]
+    ];
+    const intensitas = [
+      ["Ringan", "Masih bisa bernyanyi atau berbicara dengan lancar", "Jalan santai, peregangan, yoga ringan"],
+      ["Sedang", "Napas lebih cepat, masih bisa berbicara tetapi tidak bisa bernyanyi", "Jalan cepat, bersepeda santai, senam aerobik"],
+      ["Berat", "Napas terengah-engah, hanya bisa mengucapkan beberapa kata", "Lari cepat, berenang cepat, lompat tali"]
+    ];
+    const jadwalOr = [
+      ["Senin", "Jalan cepat", ["Pemanasan 5 menit", "Jalan cepat 30 menit", "Pendinginan dan peregangan 5 menit"]],
+      ["Rabu", "Penguat otot", ["Squat 2 set × 10 kali", "Push-up (boleh di lutut) 2 set × 8 kali", "Plank 2 × 20 detik"]],
+      ["Jumat", "Bersepeda atau jogging", ["Pemanasan 5 menit", "Bersepeda atau jogging ringan 30 menit", "Peregangan 5 menit"]],
+      ["Sabtu atau Minggu", "Olahraga santai", ["Bulu tangkis, berenang, atau yoga", "Boleh bersama keluarga atau teman", "Lakukan selama 30–45 menit"]]
+    ];
+    const tahapOr = [
+      "<strong>Pemanasan (5–10 menit).</strong> Gerakkan sendi dan jalan di tempat agar otot siap.",
+      "<strong>Inti (20–30 menit).</strong> Lakukan olahraga pilihanmu dengan intensitas sedang.",
+      "<strong>Pendinginan (5 menit).</strong> Kurangi kecepatan secara bertahap sampai napas tenang.",
+      "<strong>Peregangan.</strong> Tahan tiap gerakan 15–30 detik tanpa memaksa."
+    ];
+    const tipsOr = [
+      "Mulai pelan-pelan, lalu tingkatkan durasi dan intensitas secara bertahap.",
+      "Gunakan pakaian nyaman dan sepatu yang sesuai jenis olahraga.",
+      "Minum air putih sebelum, saat, dan sesudah berolahraga.",
+      "Hindari berolahraga di jam terlalu terik; pilih pagi atau sore hari.",
+      "Jangan berolahraga sesaat setelah makan besar; beri jeda sekitar 1–2 jam.",
+      "Dengarkan tubuh dan beri hari istirahat agar otot pulih."
+    ];
+
+    const statsTd = [["7–9 jam", "Kebutuhan tidur dewasa per malam"], ["8–10 jam", "Kebutuhan tidur remaja per malam"], ["± 90 mnt", "Satu siklus tidur"], ["30–60 mnt", "Jeda gawai sebelum tidur"]];
+    const manfaatTd = [
+      ["Tubuh pulih", "Otot, sel, dan daya tahan tubuh diperbaiki saat kita beristirahat."],
+      ["Otak lebih tajam", "Tidur membantu fokus, daya ingat, dan kemampuan belajar."],
+      ["Suasana hati stabil", "Tidur cukup membuat emosi lebih terkendali dan stres lebih mudah dikelola."],
+      ["Jantung lebih sehat", "Tidur teratur membantu menjaga tekanan darah dan kesehatan jantung."],
+      ["Berat badan terjaga", "Kurang tidur dapat memicu rasa lapar dan keinginan makan yang berlebihan."],
+      ["Lebih berenergi", "Bangun dengan tubuh segar dan siap beraktivitas sepanjang hari."],
+      ["Daya tahan kuat", "Tubuh yang cukup istirahat lebih mampu melawan penyakit."],
+      ["Aktivitas lebih aman", "Tidak mudah mengantuk saat belajar, bekerja, atau berkendara."]
+    ];
+    const usiaTd = [
+      ["Anak usia sekolah (6–12 tahun)", "9–12 jam", "Termasuk waktu tidur di malam hari saja"],
+      ["Remaja (13–18 tahun)", "8–10 jam", "Hindari begadang karena jadwal sekolah"],
+      ["Dewasa (18–60 tahun)", "7–9 jam", "Usahakan konsisten, juga di akhir pekan"],
+      ["Lansia (60 tahun ke atas)", "7–8 jam", "Pola tidur cenderung lebih ringan dan mudah terbangun"]
+    ];
+    const rutinTd = [
+      ["Sore hari", "Persiapan", ["Berolahraga ringan atau jalan kaki", "Kurangi kopi, teh, dan minuman berkafein", "Hindari tidur siang terlalu lama (maksimal sekitar 30 menit)"]],
+      ["1–2 jam sebelum tidur", "Menenangkan diri", ["Makan malam secukupnya, tidak terlalu berat", "Mandi air hangat", "Redupkan lampu ruangan"]],
+      ["30 menit sebelum tidur", "Rileks", ["Matikan atau jauhkan gawai", "Membaca buku, mendengarkan musik tenang, atau peregangan ringan", "Tulis hal yang dipikirkan agar pikiran lebih lega"]],
+      ["Saat di tempat tidur", "Mulai tidur", ["Atur napas dalam dan pelan", "Pastikan kamar gelap, sejuk, dan tenang", "Tidur di jam yang sama setiap malam"]]
+    ];
+    // Isi gambar kamar tidur: ganti path di kolom pertama sesuai file milikmu
+    const kamarTd = [
+      ["images/kamargelap.jpg", "Gelap", "Matikan lampu atau gunakan tirai dan penutup mata agar tubuh mudah mengantuk."],
+      ["images/kamarsejuk.jpg", "Sejuk", "Suhu yang nyaman dan sirkulasi udara baik membuat tidur lebih lelap."],
+      ["images/kamartenang.jpg", "Tenang", "Kurangi kebisingan, atau gunakan penyumbat telinga bila perlu."],
+      ["images/kamarnyaman.jpg", "Bersih dan nyaman", "Ganti sprei secara rutin dan pilih kasur serta bantal yang nyaman."]
+    ];
+    const gangguTd = [
+      "Kopi, teh pekat, dan minuman berenergi di sore atau malam hari",
+      "Makan besar atau makanan pedas sesaat sebelum tidur",
+      "Bermain gawai dan menonton layar sampai larut malam",
+      "Jam tidur dan bangun yang berubah-ubah",
+      "Merokok dan minum alkohol menjelang tidur",
+      "Kamar yang terlalu terang, panas, atau bising"
+    ];
+    const tipsTd = [
+      "<strong>Tidur dan bangun di jam yang sama.</strong> Termasuk di akhir pekan agar jam biologis stabil.",
+      "<strong>Paparkan diri pada cahaya pagi.</strong> Cahaya matahari pagi membantu mengatur ritme tidur.",
+      "<strong>Aktif bergerak di siang hari.</strong> Olahraga teratur membantu tidur lebih nyenyak.",
+      "<strong>Batasi kafein.</strong> Hindari kopi dan minuman berkafein mulai sore hari.",
+      "<strong>Jauhkan gawai.</strong> Cahaya layar dapat membuat otak tetap terjaga.",
+      "<strong>Gunakan kasur untuk tidur.</strong> Hindari bekerja atau belajar di atas tempat tidur."
+    ];
+    const susahTd = [
+      "Bila belum mengantuk setelah sekitar 20 menit, bangun sebentar dan lakukan kegiatan tenang dengan lampu redup.",
+      "Hindari melihat jam terus-menerus karena dapat membuat cemas.",
+      "Coba latihan napas: tarik napas 4 hitungan, tahan, lalu hembuskan perlahan.",
+      "Jangan memaksa diri untuk tidur, kembali ke tempat tidur saat mulai terasa mengantuk.",
+      "Bila pikiran penuh, tulis dulu kekhawatiranmu di buku catatan sebelum tidur."
+    ];
+
+    const $ = id => document.getElementById(id);
+    const put = (id, html) => $(id).innerHTML = html;
+    const fill = (id, arr, fn) => put(id, arr.map(fn).join(""));
+    const li = t => `<li class="list-group-item">${t}</li>`;
+    const col = (cls, body) => `<div class="${cls}">${body}</div>`;
+    const card = (body, style = "") => `<div class="card h-100 lift" style="${style}">${body}</div>`;
+    const stat = cls => ([big, t]) => col(cls, card(`<div class="card-body"><div class="big fs-3 text-success mb-1">${big}</div><div class="small text-secondary">${t}</div></div>`));
+    const info = ([t, d]) => col("col-12 col-sm-6 col-lg-3", card(`<div class="card-body"><h3 class="h6 fw-bold">${t}</h3><p class="text-secondary mb-0">${d}</p></div>`));
+    const rows = ([a, b, c]) => `<tr><td><strong>${a}</strong></td><td>${b}</td><td>${c}</td></tr>`;
+    const accordion = (id, key) => ([t, badge, items], i) => `
+      <div class="accordion-item">
+        <h3 class="accordion-header"><button class="accordion-button ${i ? "collapsed" : ""}" data-bs-toggle="collapse" data-bs-target="#${key}${i}">${t}<span class="badge rounded-pill text-bg-success ms-2">${badge}</span></button></h3>
+        <div id="${key}${i}" class="accordion-collapse collapse ${i ? "" : "show"}" data-bs-parent="#${id}"><div class="accordion-body"><ul class="mb-0">${items.map(x => `<li>${x}</li>`).join("")}</ul></div></div>
+      </div>`;
+    const hero = (id, eyebrow, title, lead, sub, img, alt, extra = "", size = "display-5") => put(id, `
+      <div class="card hero border rounded-4 shadow p-4 p-md-5"><div class="row align-items-center g-4">
+        <div class="col-lg-7">
+          <span class="badge rounded-pill bg-success-subtle text-success text-uppercase">${eyebrow}</span>
+          <h1 class="title ${size} mt-3 mb-3">${title}</h1>
+          <p class="fs-5">${lead}</p><p class="text-secondary mb-0">${sub}</p>${extra}
+        </div>
+        <div class="col-lg-5"><img src="${img}" alt="${alt}" class="w-100 rounded-4 object-fit-cover bg-success-subtle" style="aspect-ratio:4/3" onerror="this.onerror=null;this.style.visibility='hidden'"></div>
+      </div></div>`);
+
+    hero("hero-home", "Selamat datang", "Healthy <span>Lifestyle</span>",
+      "<strong class='text-success'>Healthy lifestyle</strong> adalah gaya hidup sehat, yaitu kebiasaan sehari-hari untuk menjaga kesehatan tubuh dan pikiran agar tetap bugar dan terhindar dari berbagai penyakit.",
+      "Bukan hanya soal makan sayur dan buah, tetapi juga pola tidur, olahraga, kebersihan diri, dan mengelola stres.",
+      "healthylifestyle.jpg", "Ilustrasi gaya hidup sehat",
+      `<div class="d-flex flex-wrap gap-2 mt-4"><a href="#apa-saja" class="btn btn-success rounded-pill px-4">Mulai pelajari</a><a href="#checklist" class="btn btn-outline-secondary rounded-pill px-4">Coba checklist harian</a></div>`, "display-3");
+    hero("hero-makan", "Makanan Sehat", "Makan seimbang, <span>tubuh bertenaga</span>",
+      "<strong class='text-success'>Makanan sehat</strong> adalah makanan yang mengandung zat gizi yang dibutuhkan tubuh dalam jumlah cukup dan seimbang, serta aman dikonsumsi.",
+      "Membantu tubuh tumbuh, menghasilkan energi, memperbaiki sel, dan menjaga daya tahan.",
+      "images.jpg", "Piring berisi sayur, buah, dan nasi");
+    hero("hero-or", "Olahraga", "Rutin bergerak, <span>tubuh makin bugar</span>",
+      "<strong class='text-success'>Olahraga</strong> adalah aktivitas fisik yang terencana dan dilakukan berulang untuk menjaga atau meningkatkan kebugaran tubuh.",
+      "Tidak harus berat dan mahal. Jalan kaki, bersepeda, atau senam ringan di rumah sudah sangat bermanfaat bila dilakukan secara teratur.",
+      "images/jogging.jpg", "Orang berolahraga di luar ruangan");
+    hero("hero-tidur", "Tips Tidur", "Tidur nyenyak, <span>pagi lebih segar</span>",
+      "<strong class='text-success'>Tidur</strong> adalah waktu bagi tubuh dan otak untuk beristirahat, memulihkan energi, dan memperbaiki diri setelah beraktivitas seharian.",
+      "Kualitas tidur sama pentingnya dengan lamanya. Tidur yang teratur dan nyenyak membuat tubuh sehat dan pikiran lebih tenang.",
+      "images/tidur.jpg", "Orang tidur nyenyak di tempat tidur yang nyaman");
+
+    fill("stats", stats, stat("col-6 col-md-3"));
+    fill("pilar", pilar, ([c, t, d], i) => col("col-12 col-md-6 col-lg-4", card(`<div class="card-body p-4"><span class="fw-bold" style="color:${c}">0${i + 1}</span><h3 class="h5 fw-bold mt-2">${t}</h3><p class="text-secondary mb-0">${d}</p></div>`, `border-top:4px solid ${c}`)));
+    $("pilar").insertAdjacentHTML("beforeend", col("col-12 col-md-6 col-lg-4", `
+      <div class="card h-100 bg-success-subtle border-top border-4 border-success"><div class="card-body p-4 d-flex flex-column justify-content-center gap-2">
+        <h3 class="h5 fw-bold">Ingin tahu lebih banyak?</h3>
+        <div class="d-flex flex-wrap gap-2"><a href="#makanan-sehat" class="btn btn-sm btn-success rounded-pill">Makanan</a><a href="#olahraga" class="btn btn-sm btn-success rounded-pill">Olahraga</a><a href="#tips-tidur" class="btn btn-sm btn-success rounded-pill">Tidur</a></div>
+      </div></div>`));
+    fill("manfaat", manfaat, info);
+    fill("checkList", checks, (t, i) => col("col-12 col-md-6", `<div class="form-check border rounded-3 p-3 ps-5"><input class="form-check-input" type="checkbox" id="c${i}"><label class="form-check-label stretched-link" for="c${i}">${t}</label></div>`));
+
+    fill("legend", legend, ([c, t, d]) => `<div class="d-flex gap-3 mb-3"><span class="rounded flex-shrink-0 mt-1" style="width:16px;height:16px;background:${c}"></span><div><strong class="d-block">${t}</strong><span class="text-secondary">${d}</span></div></div>`);
+    fill("kelompok", kelompok, ([img, b, t, d]) => col("col-12 col-sm-6 col-lg-4", `<div class="card h-100 overflow-hidden lift"><img src="${img}" alt="${t}" class="card-img-top object-fit-cover" style="height:220px"><div class="card-body"><span class="badge rounded-pill text-bg-success mb-2">${b}</span><h3 class="h5 fw-bold">${t}</h3><p class="text-secondary mb-0">${d}</p></div></div>`));
+    fill("gizi", gizi, rows);
+    fill("menuHarian", menu, accordion("menuHarian", "m"));
+    fill("batas", batas, stat("col-12 col-md-4"));
+
+    fill("statsOr", statsOr, stat("col-6 col-md-3"));
+    fill("jenisOr", jenisOr, ([e, b, t, d]) => {
+      const visual = e.startsWith("images/")
+        ? `<img src="${e}" alt="${t}" class="w-100 object-fit-cover" style="height:180px">`
+        : `<div class="fs-1 text-center p-3 bg-success-subtle" aria-hidden="true">${e}</div>`;
+      return col("col-12 col-sm-6 col-lg-4", `
+        <div class="card h-100 overflow-hidden lift">
+          ${visual}
+          <div class="card-body">
+            <span class="badge rounded-pill text-bg-success mb-2">${b}</span>
+            <h3 class="h5 fw-bold">${t}</h3>
+            <p class="text-secondary mb-0">${d}</p>
+          </div>
+        </div>`);
+    });
+    fill("manfaatOr", manfaatOr, info);
+    fill("intensitas", intensitas, rows);
+    fill("jadwalOr", jadwalOr, accordion("jadwalOr", "j"));
+
+    fill("statsTd", statsTd, stat("col-6 col-md-3"));
+    fill("manfaatTd", manfaatTd, info);
+    fill("usiaTd", usiaTd, rows);
+    fill("rutinTd", rutinTd, accordion("rutinTd", "r"));
+    fill("kamarTd", kamarTd, ([img, t, d]) => col("col-12 col-sm-6 col-lg-3", `<div class="card h-100 overflow-hidden lift"><img src="${img}" alt="${t}" class="card-img-top object-fit-cover bg-success-subtle" style="height:160px" onerror="this.onerror=null;this.style.display='none'"><div class="card-body"><h3 class="h6 fw-bold">${t}</h3><p class="text-secondary mb-0">${d}</p></div></div>`));
+
+    [["hindari", hindari], ["tips", tips], ["batasi", batasi], ["tipsMakan", tipsMakan], ["tahapOr", tahapOr], ["tipsOr", tipsOr], ["gangguTd", gangguTd], ["tipsTd", tipsTd], ["susahTd", susahTd]]
+      .forEach(([id, arr]) => fill(id, arr, li));
+
+    $("year").textContent = new Date().getFullYear();
+
+    const pages = [...document.querySelectorAll("section[data-page]")];
+    const links = [...document.querySelectorAll(".nav-link")];
+    const ids = pages.map(p => p.dataset.page);
+
+    function show() {
+      const hash = location.hash.slice(1);
+      const id = ids.includes(hash) ? hash : "home";
+      pages.forEach(p => p.classList.toggle("d-none", p.dataset.page !== id));
+      links.forEach(a => a.classList.toggle("active", a.dataset.page === id));
+      bootstrap.Collapse.getInstance($("menu"))?.hide();
+      const anchor = !ids.includes(hash) && $(hash);   // anchor di dalam Home, mis. #checklist
+      anchor ? anchor.scrollIntoView() : scrollTo(0, 0);
+    }
+    addEventListener("hashchange", show);
+    show();
+
+    const boxes = [...document.querySelectorAll("#checkList input")];
+    const KEY = "hl-checklist-" + new Date().toISOString().slice(0, 10);
+
+    function update() {
+      const n = boxes.filter(b => b.checked).length;
+      const pct = Math.round(n / boxes.length * 100);
+      $("checkBar").style.width = pct + "%";
+      $("checkBar").parentElement.setAttribute("aria-valuenow", pct);
+      $("checkLabel").textContent = `${n} dari ${boxes.length}`;
+      $("checkMsg").textContent = n === boxes.length ? "Hebat! Semua kebiasaan sehat hari ini sudah terpenuhi" : n ? "Bagus, lanjutkan sampai semuanya tercentang." : "";
+    }
+    try { JSON.parse(localStorage.getItem(KEY) || "[]").forEach((v, i) => boxes[i] && (boxes[i].checked = v)); } catch (e) {}
+    boxes.forEach(b => b.addEventListener("change", () => {
+      try { localStorage.setItem(KEY, JSON.stringify(boxes.map(x => x.checked))); } catch (e) {}
+      update();
+    }));
+    update();
+  </script>
+</body>
+</html>
